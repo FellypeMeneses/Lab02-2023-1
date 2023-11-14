@@ -13,87 +13,183 @@ public class ListaArray implements EstruturaElementar{
 
     @Override
     public boolean buscaElemento(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscaElemento'");
+       if(array == null){
+        return false;
     }
-
+    else{
+        for(int i=0;i<array.length;i++){
+            if(array[i]==valor){
+                return true;
+            }
+        }
+        return false;
+    }
+}
     @Override
     public int buscaIndice(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'buscaIndice'");
+        return array[valor];
     }
-
     @Override
     public int minimo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'minimo'");
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<array.length;i++){
+            if(array[i]<min){
+                min=array[i];
+            }
+        }
+        return min;
     }
 
     @Override
     public int maximo() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'maximo'");
+        int max=Integer.MIN_VALUE;
+        for(int i=0;i<array.length;i++){
+            if(array[i]>max){
+                max=array[i];
+            }
+        }
+        return max;
     }
 
     @Override
     public int predecessor(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'predecessor'");
+        return array[valor-1];
     }
+
 
     @Override
     public int sucessor(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'sucessor'");
+        return array[valor+1];
     }
 
     @Override
     public void insereElemento(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insereElemento'");
-    }
+        if(array==null){
+            array=new int[1];
+            array[0]=valor;
+          }
+          else{
+            int[] novoArray = new int[array.length+1];
+            for(int i=0;i<array.length;i++){
+               novoArray[i]=array[i];
+           }
+           novoArray[array.length]=valor;
+           array=novoArray;
+           }   
+       }
+   
 
     @Override
     public void insereElementoPosicao(int valor, int buscaIndice) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insereElementoPosicao'");
+        if(array==null){
+            array=new int[1];
+            array[0]=valor;
+        }
+        else{
+            int[] novoArray = new int[array.length+1];
+            for(int i=0;i<buscaIndice;i++){
+                novoArray[i]=array[i];
+            }
+            novoArray[buscaIndice]=valor;
+            for(int i=buscaIndice+1;i<array.length;i++){
+                novoArray[i]=array[i-1];
+            }
+            array=novoArray;
+        }
+
     }
 
     @Override
     public void insereInicio(int valor) {
-        for (int i = indice_fim - 1; i > 0; i--)
-            array[i] = array[i+1];
-        array[0] = valor;
+        if(array==null){
+            array=new int[1];
+            array[0]=valor;
+        }
+        else{
+            int[] novoArray= new int[array.length+1];
+            for(int i=0;i<array.length;i++){
+                novoArray[i+1]=array[i];
+            }
+            novoArray[0]=valor;
+            array=novoArray;
+        }
     }
 
     @Override
     public void insereFim(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insereFim'");
+        if(array==null){
+            array=new int[1];
+            array[0]=valor;
+        }
+        else{
+            int[] novoArray= new int[array.length+1];
+            for(int i=0;i<array.length;i++){
+                novoArray[i]=array[i];
+            }
+            novoArray[array.length]=valor;
+            array=novoArray;
+        }
     }
-
     @Override
     public void remove(int valor) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'remove'");
+        if(buscaElemento(valor)){
+            int[] arrayNovo=new int[array.length-1];
+            int indice=0;
+            for(int i=0;i<array.length;i++){
+                if(array[i]!=valor){
+                    arrayNovo[indice]=array[i];
+                    indice=indice+1;
+                }
+                else{}
+            }
+            array=arrayNovo;
+        }
+        
     }
 
     @Override
     public void removeIndice(int indice) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeIndice'");
+        if(array==null||array.length==0){
+            array=null;
+        }
+        else{
+            int[] arrayNovo = new int[array.length-1];
+            for(int i=0;i<indice;i++){
+                arrayNovo[i]=array[i];
+            }
+            for(int i=indice+1;i<array.length;i++){
+                arrayNovo[i-1]=array[i];
+            }
+            array=arrayNovo;
+        }
     }
 
     @Override
     public void removeInicio() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeInicio'");
+        if(array==null||array.length==0){
+            array=null;
+        }
+        else{
+            int[] arrayNovo = new int[array.length-1];
+            for(int i=0;i<array.length-2;i++){
+                arrayNovo[i]=array[i+1];
+            }
+            array = arrayNovo;
+        }
     }
-
     @Override
     public void removeFim() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'removeFim'");
+       if(array==null||array.length==0){
+            array=null;
+        }
+        else{
+            int[] arrayNovo = new int[array.length-1];
+            for(int i=0;i<array.length-1;i++){
+                arrayNovo[i]=array[i];
+            }
+            array=arrayNovo;
+        }
+        
     }
     
 }
